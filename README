@@ -1,3 +1,13 @@
+====== Fork from PTGreg
+
+
+The only point of this Fork is to use the thrift compiler to generate file compatible with BSON.
+
+
+You should not use it if you don't want the Thrift compiler to generate CSharp object compatible with BSON.
+
+
+=======
 Apache Thrift
 
 Last Modified: 2010-Nov-04
