@@ -173,7 +173,8 @@ string t_csharp_generator::csharp_type_usings() {
 string t_csharp_generator::csharp_thrift_usings() {
   return string() +
     "using Thrift.Protocol;\n" +
-    "using Thrift.Transport;\n";
+    "using Thrift.Transport;\n" + 
+	"using MongoDB.Bson.Serialization.Attributes;\n";
 }
 
 void t_csharp_generator::close_generator() { }
@@ -182,7 +183,7 @@ void t_csharp_generator::generate_typedef(t_typedef* ttypedef) {
 }
 
 void t_csharp_generator::generate_enum(t_enum* tenum) {
-  string f_enum_name = namespace_dir_+"/" + (tenum->get_name())+".cs";
+  string f_enum_name = namespace_dir_+"/" + (tenum->get_name())+".Designer.cs";
   ofstream f_enum;
   f_enum.open(f_enum_name.c_str());
 
@@ -213,7 +214,7 @@ void t_csharp_generator::generate_consts(std::vector<t_const*> consts) {
   if (consts.empty()){
     return;
   }
-  string f_consts_name = namespace_dir_ + "/Constants.cs";
+  string f_consts_name = namespace_dir_ + "/Constants.Designer.cs";
   ofstream f_consts;
   f_consts.open(f_consts_name.c_str());
 
@@ -386,7 +387,7 @@ void t_csharp_generator::generate_xception(t_struct* txception) {
 }
 
 void t_csharp_generator::generate_csharp_struct(t_struct* tstruct, bool is_exception) {
-  string f_struct_name = namespace_dir_ + "/" + (tstruct->get_name()) + ".cs";
+  string f_struct_name = namespace_dir_ + "/" + (tstruct->get_name()) + ".Designer.cs";
   ofstream f_struct;
 
   f_struct.open(f_struct_name.c_str());
@@ -439,6 +440,7 @@ void t_csharp_generator::generate_csharp_struct_definition(ofstream &out, t_stru
   if (members.size() > 0) {
     out <<
       endl <<
+	  indent() << "[BsonIgnore]" << endl <<
       indent() << "public Isset __isset;" << endl <<
       indent() << "[Serializable]" << endl <<
       indent() << "public struct Isset {" << endl;
@@ -734,7 +736,7 @@ void t_csharp_generator::generate_csharp_struct_tostring(ofstream& out, t_struct
 }
 
 void t_csharp_generator::generate_service(t_service* tservice) {
-  string f_service_name = namespace_dir_ + "/" + service_name_ + ".cs";
+  string f_service_name = namespace_dir_ + "/" + service_name_ + ".Designer.cs";
   f_service_.open(f_service_name.c_str());
 
   f_service_ <<
@@ -1522,7 +1524,8 @@ void t_csharp_generator::generate_property(ofstream& out, t_field* tfield, bool 
     generate_csharp_property(out, tfield, isPublic, "_");
 }
 void t_csharp_generator::generate_csharp_property(ofstream& out, t_field* tfield, bool isPublic, std::string fieldPrefix) {
-    indent(out) << (isPublic ? "public " : "private ") << type_name(tfield->get_type())
+    indent(out) << "[BsonIgnoreIfNull]" << endl;
+	indent(out) << (isPublic ? "public " : "private ") << type_name(tfield->get_type())
                 << " " << prop_name(tfield) << endl;
     scope_up(out);
     indent(out) << "get" << endl;
