@@ -579,9 +579,15 @@ void t_csharp_generator::generate_csharp_struct_writer(ofstream& out, t_struct* 
     indent(out) << "TField field = new TField();" << endl;
     for (f_iter = fields.begin(); f_iter != fields.end(); ++f_iter) {
       bool null_allowed = type_can_be_null((*f_iter)->get_type());
+      bool is_container = (*f_iter)->get_type()->is_container();
       if (null_allowed) {
         indent(out) <<
-          "if (" << prop_name((*f_iter)) << " != null && __isset." << (*f_iter)->get_name() << ") {" << endl;
+          "if (" << prop_name((*f_iter)) << " != null ";
+	if (is_container)
+	  {
+	    out << " && " << prop_name((*f_iter)) << ".Count > 0 ";
+	  }
+	out << "&& __isset." << (*f_iter)->get_name() << ") {" << endl;
         indent_up();
       }
       else
