@@ -65,6 +65,8 @@ class t_csharp_generator : public t_oop_generator
     void print_const_constructor(std::ofstream& out, std::vector<t_const*> consts);
     void print_const_def_value(std::ofstream& out, std::string name, t_type* type, t_const_value* value);
 
+    void generate_csharp_interface_definition(ofstream &out, t_struct* tstruct);
+
     void generate_csharp_struct(t_struct* tstruct, bool is_exception);
     void generate_csharp_struct_definition(std::ofstream& out, t_struct* tstruct, bool is_xception=false, bool in_class=false, bool is_result=false);
     void generate_csharp_struct_reader(std::ofstream& out, t_struct* tstruct);
@@ -173,8 +175,7 @@ string t_csharp_generator::csharp_type_usings() {
 string t_csharp_generator::csharp_thrift_usings() {
   return string() +
     "using Thrift.Protocol;\n" +
-    "using Thrift.Transport;\n" + 
-	"using MongoDB.Bson.Serialization.Attributes;\n";
+    "using Thrift.Transport;\n"; 
 }
 
 void t_csharp_generator::close_generator() { }
@@ -400,6 +401,38 @@ void t_csharp_generator::generate_csharp_struct(t_struct* tstruct, bool is_excep
   generate_csharp_struct_definition(f_struct, tstruct, is_exception);
 
   f_struct.close();
+
+  string f_inter_name = namespace_dir_ + "/I" + (tstruct->get_name()) + ".Designer.cs";
+  ofstream f_inter;
+  f_inter.open(f_inter_name.c_str());
+  f_inter <<
+    autogen_comment() <<
+    csharp_type_usings() <<
+    csharp_thrift_usings();
+
+  generate_csharp_interface_definition(f_inter, tstruct);
+
+  f_inter.close();
+}
+
+
+void t_csharp_generator::generate_csharp_interface_definition(ofstream &out, t_struct* tstruct)
+{
+  start_csharp_namespace(out);
+  out << endl;
+  indent(out) << "public partial interface I" << tstruct->get_name() << endl;
+  scope_up(out);
+
+  const vector<t_field*>& members = tstruct->get_members();
+  vector<t_field*>::const_iterator m_iter;
+
+  //make private members with public Properties
+   for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
+     indent(out) << type_name((*m_iter)->get_type()) << " " << prop_name(*m_iter) << " { get; set; }" << endl;
+   }
+   out << endl;
+
+  scope_down(out);
 }
 
 void t_csharp_generator::generate_csharp_struct_definition(ofstream &out, t_struct* tstruct, bool is_exception, bool in_class, bool is_result) {
@@ -412,7 +445,7 @@ void t_csharp_generator::generate_csharp_struct_definition(ofstream &out, t_stru
   indent(out) << "[Serializable]" << endl;
   bool is_final = (tstruct->annotations_.find("final") != tstruct->annotations_.end());
  
-  indent(out) << "public " << (is_final ? "sealed " : "") << "partial class " << tstruct->get_name() << " : ";
+  indent(out) << "public " << (is_final ? "sealed " : "") << "partial class " << tstruct->get_name() << " : I" << tstruct->get_name() << ", ";
 
   if (is_exception) {
     out << "Exception, ";
@@ -440,7 +473,6 @@ void t_csharp_generator::generate_csharp_struct_definition(ofstream &out, t_stru
   if (members.size() > 0) {
     out <<
       endl <<
-	  indent() << "[BsonIgnore]" << endl <<
       indent() << "public Isset __isset;" << endl <<
       indent() << "[Serializable]" << endl <<
       indent() << "public struct Isset {" << endl;
@@ -1359,8 +1391,7 @@ void t_csharp_generator::generate_deserialize_list_element(ofstream& out, t_list
   string elem = tmp("_elem");
   t_field felem(tlist->get_elem_type(), elem);
 
-  indent(out) <<
-    declare_field(&felem, true) << endl;
+  indent(out) << type_name((&felem)->get_type()) + " " + (&felem)->get_name() << ";" << endl;
 
   generate_deserialize_field(out, &felem);
 
@@ -1530,8 +1561,8 @@ void t_csharp_generator::generate_property(ofstream& out, t_field* tfield, bool 
     generate_csharp_property(out, tfield, isPublic, "_");
 }
 void t_csharp_generator::generate_csharp_property(ofstream& out, t_field* tfield, bool isPublic, std::string fieldPrefix) {
-    indent(out) << "[BsonIgnoreIfNull]" << endl;
-	indent(out) << (isPublic ? "public " : "private ") << type_name(tfield->get_type())
+
+    indent(out) << (isPublic ? "public " : "private ") << type_name(tfield->get_type())
                 << " " << prop_name(tfield) << endl;
     scope_up(out);
     indent(out) << "get" << endl;
