@@ -100,7 +100,7 @@ class t_csharp_generator : public t_oop_generator
     std::string csharp_type_usings();
     std::string csharp_thrift_usings();
 
-    std::string type_name(t_type* ttype, bool in_countainer=false, bool in_init=false);
+    std::string type_name(t_type* ttype, bool in_countainer=false, bool in_init=false, bool is_interface=false);
     std::string base_type_name(t_base_type* tbase, bool in_container=false);
     std::string declare_field(t_field* tfield, bool init=false, std::string prefix="");
     std::string function_signature(t_function* tfunction, std::string prefix="");
@@ -167,13 +167,13 @@ string t_csharp_generator::csharp_type_usings() {
     "using System.Collections;\n" +
     "using System.Collections.Generic;\n" +
     "using System.Text;\n" +
-    "using System.IO;\n" +
-    "using Thrift;\n" +
-    "using Thrift.Collections;\n";
+    "using System.IO;\n";
 }
 
 string t_csharp_generator::csharp_thrift_usings() {
   return string() +
+    "using Thrift;\n" +
+    "using Thrift.Collections;\n" +
     "using Thrift.Protocol;\n" +
     "using Thrift.Transport;\n"; 
 }
@@ -407,8 +407,7 @@ void t_csharp_generator::generate_csharp_struct(t_struct* tstruct, bool is_excep
   f_inter.open(f_inter_name.c_str());
   f_inter <<
     autogen_comment() <<
-    csharp_type_usings() <<
-    csharp_thrift_usings();
+    csharp_type_usings();
 
   generate_csharp_interface_definition(f_inter, tstruct);
 
@@ -428,7 +427,7 @@ void t_csharp_generator::generate_csharp_interface_definition(ofstream &out, t_s
 
   //make private members with public Properties
    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
-     indent(out) << type_name((*m_iter)->get_type()) << " " << prop_name(*m_iter) << " { get; set; }" << endl;
+     indent(out) << type_name((*m_iter)->get_type(), false, false, true) << " " << prop_name(*m_iter) << " { get; set; }" << endl;
    }
    out << endl;
 
@@ -1299,8 +1298,9 @@ void t_csharp_generator::generate_deserialize_field(ofstream& out, t_field* tfie
 
 void t_csharp_generator::generate_deserialize_struct(ofstream& out, t_struct* tstruct, string prefix) {
   out <<
-    indent() << prefix << " = new " << type_name(tstruct) << "();" << endl <<
-    indent() << prefix << ".Read(iprot);" << endl;
+    indent() << "var __" << prefix << " = new " << type_name(tstruct) << "();" << endl <<
+    indent() << "__" << prefix << ".Read(iprot);" << endl <<
+    indent() << prefix << " = " << "__" << prefix << ";" << endl;
 }
 
 void t_csharp_generator::generate_deserialize_container(ofstream& out, t_type* ttype, string prefix) {
@@ -1317,7 +1317,7 @@ void t_csharp_generator::generate_deserialize_container(ofstream& out, t_type* t
   }
 
   indent(out) <<
-    prefix << " = new " << type_name(ttype, false, true) << "();" <<endl;
+    prefix << " = new " << type_name(ttype, false, true, true) << "();" <<endl;
   if (ttype->is_map()) {
     out <<
       indent() << "TMap " << obj << " = iprot.ReadMapBegin();" << endl;
@@ -1406,6 +1406,7 @@ void t_csharp_generator::generate_serialize_field(ofstream& out, t_field* tfield
   }
 
   string name = prefix + prop_name(tfield);
+  string fieldName = "_" + tfield->get_name();
   
   if (type->is_void()) {
     throw "CANNOT GENERATE SERIALIZE CODE FOR void TYPE: " + name;
@@ -1414,7 +1415,7 @@ void t_csharp_generator::generate_serialize_field(ofstream& out, t_field* tfield
   if (type->is_struct() || type->is_xception()) {
     generate_serialize_struct(out, (t_struct*)type, name);
   } else if (type->is_container()) {
-    generate_serialize_container(out, type, name);
+    generate_serialize_container(out, type, fieldName);
   } else if (type->is_base_type() || type->is_enum()) {
     
     indent(out) <<
@@ -1471,7 +1472,7 @@ void t_csharp_generator::generate_serialize_field(ofstream& out, t_field* tfield
 void t_csharp_generator::generate_serialize_struct(ofstream& out, t_struct* tstruct, string prefix) {
   (void) tstruct;
   out <<
-    indent() << prefix << ".Write(oprot);" << endl;
+    indent() << "((" << tstruct->get_name() << ")" << prefix << ").Write(oprot);" << endl;
 }
 
 void t_csharp_generator::generate_serialize_container(ofstream& out, t_type* ttype, string prefix) {
@@ -1562,7 +1563,7 @@ void t_csharp_generator::generate_property(ofstream& out, t_field* tfield, bool 
 }
 void t_csharp_generator::generate_csharp_property(ofstream& out, t_field* tfield, bool isPublic, std::string fieldPrefix) {
 
-    indent(out) << (isPublic ? "public " : "private ") << type_name(tfield->get_type())
+    indent(out) << (isPublic ? "public " : "private ") << type_name(tfield->get_type(), false, false, true)
                 << " " << prop_name(tfield) << endl;
     scope_up(out);
     indent(out) << "get" << endl;
@@ -1584,7 +1585,7 @@ std::string t_csharp_generator::prop_name(t_field* tfield) {
     return name;
 }
 
-string t_csharp_generator::type_name(t_type* ttype, bool in_container, bool in_init) {
+string t_csharp_generator::type_name(t_type* ttype, bool in_container, bool in_init, bool is_interface) {
   (void) in_init;
   while (ttype->is_typedef()) {
     ttype = ((t_typedef*)ttype)->get_type();
@@ -1594,14 +1595,14 @@ string t_csharp_generator::type_name(t_type* ttype, bool in_container, bool in_i
     return base_type_name((t_base_type*)ttype, in_container);
   } else if (ttype->is_map()) {
     t_map *tmap = (t_map*) ttype;
-    return "Dictionary<" + type_name(tmap->get_key_type(), true) +
-      ", " + type_name(tmap->get_val_type(), true) + ">";
+    return "Dictionary<" + type_name(tmap->get_key_type(), true, false, is_interface) +
+      ", " + type_name(tmap->get_val_type(), true, false, true) + ">";
   } else if (ttype->is_set()) {
     t_set* tset = (t_set*) ttype;
-    return "THashSet<" + type_name(tset->get_elem_type(), true) + ">";
+    return "HashSet<" + type_name(tset->get_elem_type(), true, false, is_interface) + ">";
   } else if (ttype->is_list()) {
     t_list* tlist = (t_list*) ttype;
-    return "List<" + type_name(tlist->get_elem_type(), true) + ">";
+    return "List<" + type_name(tlist->get_elem_type(), true, false, is_interface) + ">";
   }
 
   t_program* program = ttype->get_program();
@@ -1612,6 +1613,9 @@ string t_csharp_generator::type_name(t_type* ttype, bool in_container, bool in_i
     }
   }
 
+  if (is_interface) {
+   return "I" + ttype->get_name();
+  }
   return ttype->get_name();
 }
 
@@ -1644,7 +1648,7 @@ string t_csharp_generator::base_type_name(t_base_type* tbase, bool in_container)
 }
 
 string t_csharp_generator::declare_field(t_field* tfield, bool init, std::string prefix) {
-  string result = type_name(tfield->get_type()) + " " + prefix + tfield->get_name();
+  string result = type_name(tfield->get_type(), false, false, true) + " " + prefix + tfield->get_name();
   if (init) {
     t_type* ttype = tfield->get_type();
     while (ttype->is_typedef()) {
