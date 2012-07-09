@@ -1614,7 +1614,7 @@ string t_csharp_generator::type_name(t_type* ttype, bool in_container, bool in_i
     }
   }
 
-  if (is_interface) {
+  if (is_interface && !ttype->is_enum()) {
    return "I" + ttype->get_name();
   }
   return ttype->get_name();
