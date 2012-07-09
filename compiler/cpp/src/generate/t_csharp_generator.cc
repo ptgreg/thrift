@@ -432,6 +432,7 @@ void t_csharp_generator::generate_csharp_interface_definition(ofstream &out, t_s
    out << endl;
 
   scope_down(out);
+  end_csharp_namespace(out);
 }
 
 void t_csharp_generator::generate_csharp_struct_definition(ofstream &out, t_struct* tstruct, bool is_exception, bool in_class, bool is_result) {
