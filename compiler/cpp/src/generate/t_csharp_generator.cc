@@ -119,6 +119,17 @@ class t_csharp_generator : public t_oop_generator
         ttype->is_string();
     }
 
+    std::string namespace_name(t_program* program)
+    {
+	  if (program != NULL && program != program_) {
+	    string ns = program->get_namespace("csharp");
+	    if (!ns.empty()) {
+		return ns + ".";
+	    }
+	  }
+	return "";
+    }
+
   private:
     std::string namespace_name_;
     std::ofstream f_service_;
@@ -1473,7 +1484,7 @@ void t_csharp_generator::generate_serialize_field(ofstream& out, t_field* tfield
 void t_csharp_generator::generate_serialize_struct(ofstream& out, t_struct* tstruct, string prefix) {
   (void) tstruct;
   out <<
-    indent() << "((" << tstruct->get_name() << ")" << prefix << ").Write(oprot);" << endl;
+    indent() << "((" << namespace_name(tstruct->get_program()) + tstruct->get_name() << ")" << prefix << ").Write(oprot);" << endl;
 }
 
 void t_csharp_generator::generate_serialize_container(ofstream& out, t_type* ttype, string prefix) {
@@ -1607,22 +1618,12 @@ string t_csharp_generator::type_name(t_type* ttype, bool in_container, bool in_i
   }
 
   t_program* program = ttype->get_program();
-  if (program != NULL && program != program_) {
-    string ns = program->get_namespace("csharp");
-    if (!ns.empty()) {
-	if (is_interface)
-	{
-	      return ns + ".I" + ttype->get_name();
-	} else {
-	      return ns + "." + ttype->get_name();
-	}
-    }
-  }
+  std:string namespacename = namespace_name(program);
 
   if (is_interface && !ttype->is_enum()) {
-   return "I" + ttype->get_name();
+   return namespacename + "I" + ttype->get_name();
   }
-  return ttype->get_name();
+  return namespacename + ttype->get_name();
 }
 
 string t_csharp_generator::base_type_name(t_base_type* tbase, bool in_container) {
