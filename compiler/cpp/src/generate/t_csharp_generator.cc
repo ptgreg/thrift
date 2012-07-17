@@ -1610,7 +1610,12 @@ string t_csharp_generator::type_name(t_type* ttype, bool in_container, bool in_i
   if (program != NULL && program != program_) {
     string ns = program->get_namespace("csharp");
     if (!ns.empty()) {
-      return ns + "." + ttype->get_name();
+	if (is_interface)
+	{
+	      return ns + ".I" + ttype->get_name();
+	} else {
+	      return ns + "." + ttype->get_name();
+	}
     }
   }
 
