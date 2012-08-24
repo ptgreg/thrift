@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.thrift.transport;
+package org.criteo.thrift.transport;
 
 import java.util.Arrays;
 

@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.thrift;
+package org.criteo.thrift;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,13 +29,13 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.apache.thrift.meta_data.FieldMetaData;
-import org.apache.thrift.meta_data.ListMetaData;
-import org.apache.thrift.meta_data.MapMetaData;
-import org.apache.thrift.meta_data.SetMetaData;
-import org.apache.thrift.meta_data.StructMetaData;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TType;
+import org.criteo.thrift.meta_data.FieldMetaData;
+import org.criteo.thrift.meta_data.ListMetaData;
+import org.criteo.thrift.meta_data.MapMetaData;
+import org.criteo.thrift.meta_data.SetMetaData;
+import org.criteo.thrift.meta_data.StructMetaData;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TType;
 
 import thrift.test.Bonk;
 import thrift.test.CrazyNesting;

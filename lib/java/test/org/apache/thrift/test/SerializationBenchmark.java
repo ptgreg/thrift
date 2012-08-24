@@ -18,17 +18,17 @@
  */
 
 
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
-import org.apache.thrift.Fixtures;
-import org.apache.thrift.TBase;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.transport.TMemoryBuffer;
-import org.apache.thrift.transport.TMemoryInputTransport;
-import org.apache.thrift.transport.TTransport;
-import org.apache.thrift.transport.TTransportException;
+import org.criteo.thrift.Fixtures;
+import org.criteo.thrift.TBase;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.transport.TMemoryBuffer;
+import org.criteo.thrift.transport.TMemoryInputTransport;
+import org.criteo.thrift.transport.TTransport;
+import org.criteo.thrift.transport.TTransportException;
 
 import thrift.test.OneOfEach;
 

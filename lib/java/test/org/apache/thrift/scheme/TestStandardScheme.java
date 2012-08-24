@@ -1,16 +1,16 @@
-package org.apache.thrift.scheme;
+package org.criteo.thrift.scheme;
 
 import junit.framework.TestCase;
 
-import org.apache.thrift.Fixtures;
-import org.apache.thrift.TBase;
-import org.apache.thrift.TDeserializer;
-import org.apache.thrift.TException;
-import org.apache.thrift.TSerializer;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.transport.TMemoryBuffer;
-import org.apache.thrift.transport.TTransport;
+import org.criteo.thrift.Fixtures;
+import org.criteo.thrift.TBase;
+import org.criteo.thrift.TDeserializer;
+import org.criteo.thrift.TException;
+import org.criteo.thrift.TSerializer;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TProtocol;
+import org.criteo.thrift.transport.TMemoryBuffer;
+import org.criteo.thrift.transport.TTransport;
 
 import thrift.test.HolyMoley;
 import thrift.test.Nesting;

@@ -17,23 +17,23 @@
  * under the License.
  */
 
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 
-import org.apache.thrift.Fixtures;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.transport.TIOStreamTransport;
-import org.apache.thrift.transport.TTransport;
+import org.criteo.thrift.Fixtures;
+import org.criteo.thrift.protocol.TProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.transport.TIOStreamTransport;
+import org.criteo.thrift.transport.TTransport;
 
 import thrift.test.CompactProtoTestStruct;
 
 public class ReadStruct {
   public static void main(String[] args) throws Exception {
     if (args.length != 2) {
-      System.out.println("usage: java -cp build/classes org.apache.thrift.test.ReadStruct filename proto_factory_class");
+      System.out.println("usage: java -cp build/classes org.criteo.thrift.test.ReadStruct filename proto_factory_class");
       System.out.println("Read in an instance of CompactProtocolTestStruct from 'file', making sure that it is equivalent to Fixtures.compactProtoTestStruct. Use a protocol from 'proto_factory_class'.");
     }
 

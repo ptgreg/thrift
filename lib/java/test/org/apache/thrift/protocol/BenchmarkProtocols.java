@@ -1,4 +1,4 @@
-package org.apache.thrift.protocol;
+package org.criteo.thrift.protocol;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.thrift.Fixtures;
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TMemoryBuffer;
+import org.criteo.thrift.Fixtures;
+import org.criteo.thrift.TException;
+import org.criteo.thrift.transport.TMemoryBuffer;
 
 public class BenchmarkProtocols {
 

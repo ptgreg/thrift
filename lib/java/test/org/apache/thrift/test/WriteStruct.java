@@ -17,21 +17,21 @@
  * under the License.
  */
 
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 
-import org.apache.thrift.Fixtures;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.transport.TIOStreamTransport;
-import org.apache.thrift.transport.TTransport;
+import org.criteo.thrift.Fixtures;
+import org.criteo.thrift.protocol.TProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.transport.TIOStreamTransport;
+import org.criteo.thrift.transport.TTransport;
 
 public class WriteStruct {
   public static void main(String[] args) throws Exception {
     if (args.length != 2) {
-      System.out.println("usage: java -cp build/classes org.apache.thrift.test.WriteStruct filename proto_factory_class");
+      System.out.println("usage: java -cp build/classes org.criteo.thrift.test.WriteStruct filename proto_factory_class");
       System.out.println("Write out an instance of Fixtures.compactProtocolTestStruct to 'file'. Use a protocol from 'proto_factory_class'.");
     }
     

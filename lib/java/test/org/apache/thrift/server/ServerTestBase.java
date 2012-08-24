@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.thrift.server;
+package org.criteo.thrift.server;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,15 +28,15 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
-import org.apache.thrift.TException;
-import org.apache.thrift.TApplicationException;
-import org.apache.thrift.TProcessor;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TCompactProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.transport.TSocket;
-import org.apache.thrift.transport.TTransport;
+import org.criteo.thrift.TException;
+import org.criteo.thrift.TApplicationException;
+import org.criteo.thrift.TProcessor;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TCompactProtocol;
+import org.criteo.thrift.protocol.TProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.transport.TSocket;
+import org.criteo.thrift.transport.TTransport;
 
 import thrift.test.*;
 

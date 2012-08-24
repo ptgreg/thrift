@@ -17,14 +17,14 @@
  * under the License.
  */
 
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
-import org.apache.thrift.server.THsHaServer;
-import org.apache.thrift.server.TNonblockingServer;
-import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.THsHaServer.Args;
-import org.apache.thrift.transport.TNonblockingServerSocket;
-import org.apache.thrift.server.ServerTestBase.TestHandler;
+import org.criteo.thrift.server.THsHaServer;
+import org.criteo.thrift.server.TNonblockingServer;
+import org.criteo.thrift.server.TServer;
+import org.criteo.thrift.server.THsHaServer.Args;
+import org.criteo.thrift.transport.TNonblockingServerSocket;
+import org.criteo.thrift.server.ServerTestBase.TestHandler;
 
 import thrift.test.ThriftTest;
 

@@ -17,20 +17,20 @@
  * under the License.
  */
 
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
 // Generated code
 import thrift.test.*;
 
-import org.apache.thrift.TApplicationException;
-import org.apache.thrift.TSerializer;
-import org.apache.thrift.transport.TTransport;
-import org.apache.thrift.transport.TSocket;
-import org.apache.thrift.transport.THttpClient;
-import org.apache.thrift.transport.TFramedTransport;
-import org.apache.thrift.transport.TTransportException;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TSimpleJSONProtocol;
+import org.criteo.thrift.TApplicationException;
+import org.criteo.thrift.TSerializer;
+import org.criteo.thrift.transport.TTransport;
+import org.criteo.thrift.transport.TSocket;
+import org.criteo.thrift.transport.THttpClient;
+import org.criteo.thrift.transport.TFramedTransport;
+import org.criteo.thrift.transport.TTransportException;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TSimpleJSONProtocol;
 
 import java.util.Map;
 import java.util.HashMap;

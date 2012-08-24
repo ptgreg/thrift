@@ -1,7 +1,7 @@
-package org.apache.thrift.protocol;
+package org.criteo.thrift.protocol;
 
-import org.apache.thrift.TDeserializer;
-import org.apache.thrift.TSerializer;
+import org.criteo.thrift.TDeserializer;
+import org.criteo.thrift.TSerializer;
 
 import thrift.test.TupleProtocolTestStruct;
 

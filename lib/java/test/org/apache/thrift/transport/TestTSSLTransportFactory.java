@@ -17,18 +17,18 @@
  * under the License.
  */
 
-package org.apache.thrift.transport;
+package org.criteo.thrift.transport;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.thrift.TProcessor;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.server.ServerTestBase;
-import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TSimpleServer;
-import org.apache.thrift.server.TServer.Args;
+import org.criteo.thrift.TProcessor;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.server.ServerTestBase;
+import org.criteo.thrift.server.TServer;
+import org.criteo.thrift.server.TSimpleServer;
+import org.criteo.thrift.server.TServer.Args;
 
 public class TestTSSLTransportFactory extends ServerTestBase {
   private Thread serverThread;

@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.thrift.async;
+package org.criteo.thrift.async;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,13 +30,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import junit.framework.TestCase;
 
-import org.apache.thrift.TException;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.server.ServerTestBase;
-import org.apache.thrift.server.THsHaServer;
-import org.apache.thrift.server.THsHaServer.Args;
-import org.apache.thrift.transport.TNonblockingServerSocket;
-import org.apache.thrift.transport.TNonblockingSocket;
+import org.criteo.thrift.TException;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.server.ServerTestBase;
+import org.criteo.thrift.server.THsHaServer;
+import org.criteo.thrift.server.THsHaServer.Args;
+import org.criteo.thrift.transport.TNonblockingServerSocket;
+import org.criteo.thrift.transport.TNonblockingSocket;
 
 import thrift.test.CompactProtoTestStruct;
 import thrift.test.Srv;

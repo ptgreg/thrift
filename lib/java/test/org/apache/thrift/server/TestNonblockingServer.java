@@ -16,18 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.thrift.server;
+package org.criteo.thrift.server;
 
 
-import org.apache.thrift.TProcessor;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.server.TNonblockingServer.Args;
-import org.apache.thrift.transport.TFramedTransport;
-import org.apache.thrift.transport.TNonblockingServerSocket;
-import org.apache.thrift.transport.TSocket;
-import org.apache.thrift.transport.TTransport;
-import org.apache.thrift.transport.TTransportException;
+import org.criteo.thrift.TProcessor;
+import org.criteo.thrift.protocol.TProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.server.TNonblockingServer.Args;
+import org.criteo.thrift.transport.TFramedTransport;
+import org.criteo.thrift.transport.TNonblockingServerSocket;
+import org.criteo.thrift.transport.TSocket;
+import org.criteo.thrift.transport.TTransport;
+import org.criteo.thrift.transport.TTransportException;
 
 import thrift.test.ThriftTest;
 

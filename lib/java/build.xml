@@ -126,7 +126,7 @@
         <attribute name="Export-Package" value="${thrift.groupid};version=${version}"/>
       </manifest>
       <fileset dir="${build.dir}">
-        <include name="org/apache/thrift/**/*.class"/>
+        <include name="org.criteo.thrift/**/*.class"/>
         <include name="META-INF/*.txt"/>
       </fileset>
       <fileset dir="src">
@@ -201,28 +201,28 @@
   </target>
 
   <target name="deprecated-test" description="Run the non-JUnit test suite" depends="compile-test">
-    <java classname="org.apache.thrift.test.EqualityTest" classpathref="test.classpath" failonerror="true"/>
-    <java classname="org.apache.thrift.test.JavaBeansTest" classpathref="test.classpath" failonerror="true"/>
+    <java classname="org.criteo.thrift.test.EqualityTest" classpathref="test.classpath" failonerror="true"/>
+    <java classname="org.criteo.thrift.test.JavaBeansTest" classpathref="test.classpath" failonerror="true"/>
   </target>
 
   <target name="test" description="Run the full test suite" depends="junit-test,deprecated-test"/>
 
   <target name="testclient" description="Run a test client" depends="compile-test">
-    <java classname="org.apache.thrift.test.TestClient"
+    <java classname="org.criteo.thrift.test.TestClient"
       classpathref="test.classpath" failonerror="true">
       <arg line="${testargs}"/>
     </java>
   </target>
 
   <target name="testserver" description="Run a test server" depends="compile-test">
-    <java classname="org.apache.thrift.test.TestServer"
+    <java classname="org.criteo.thrift.test.TestServer"
       classpathref="test.classpath" failonerror="true">
       <arg line="${testargs}"/>
     </java>
   </target>
 
   <target name="testnonblockingserver" description="Run a test nonblocking server" depends="compile-test">
-    <java classname="org.apache.thrift.test.TestNonblockingServer"
+    <java classname="org.criteo.thrift.test.TestNonblockingServer"
       classpathref="test.classpath" failonerror="true">
       <arg line="${testargs}"/>
     </java>

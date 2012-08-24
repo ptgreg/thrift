@@ -18,7 +18,7 @@
  */
 
 
-package org.apache.thrift.protocol;
+package org.criteo.thrift.protocol;
 
 
 public class TestTCompactProtocol extends ProtocolTestBase {

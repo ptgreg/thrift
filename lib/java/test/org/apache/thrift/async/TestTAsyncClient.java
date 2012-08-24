@@ -1,8 +1,8 @@
-package org.apache.thrift.async;
+package org.criteo.thrift.async;
 
 import junit.framework.TestCase;
 
-import org.apache.thrift.TException;
+import org.criteo.thrift.TException;
 
 import thrift.test.Srv;
 import thrift.test.Srv.AsyncClient;

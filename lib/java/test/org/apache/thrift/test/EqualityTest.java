@@ -60,7 +60,7 @@ with open(os.path.join(os.path.dirname(sys.argv[0]), 'EqualityTest.java'), 'w') 
   print >> out, "*""/"
 
   print >> out, r'''
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
 // Generated code
 import thrift.test.*;
@@ -126,7 +126,7 @@ public class EqualityTest {
 '''
 */
 
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
 // Generated code
 import java.nio.ByteBuffer;

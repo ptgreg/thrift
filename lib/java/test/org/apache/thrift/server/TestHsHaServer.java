@@ -16,12 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.thrift.server;
+package org.criteo.thrift.server;
 
-import org.apache.thrift.TProcessor;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.server.THsHaServer.Args;
-import org.apache.thrift.transport.TNonblockingServerSocket;
+import org.criteo.thrift.TProcessor;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.server.THsHaServer.Args;
+import org.criteo.thrift.transport.TNonblockingServerSocket;
 
 public class TestHsHaServer extends TestNonblockingServer {
   protected TServer getServer(TProcessor processor, TNonblockingServerSocket socket, TProtocolFactory protoFactory) {

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.apache.thrift.test;
+package org.criteo.thrift.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,14 +25,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
-import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TServer.Args;
-import org.apache.thrift.server.TSimpleServer;
-import org.apache.thrift.server.TThreadPoolServer;
-import org.apache.thrift.transport.TServerSocket;
-import org.apache.thrift.server.ServerTestBase.TestHandler;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.server.TServer;
+import org.criteo.thrift.server.TServer.Args;
+import org.criteo.thrift.server.TSimpleServer;
+import org.criteo.thrift.server.TThreadPoolServer;
+import org.criteo.thrift.transport.TServerSocket;
+import org.criteo.thrift.server.ServerTestBase.TestHandler;
 
 import thrift.test.Insanity;
 import thrift.test.Numberz;

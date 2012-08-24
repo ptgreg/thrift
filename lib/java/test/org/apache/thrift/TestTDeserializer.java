@@ -16,16 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.thrift;
+package org.criteo.thrift;
 
 import java.nio.ByteBuffer;
 
 import junit.framework.TestCase;
 
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TCompactProtocol;
-import org.apache.thrift.protocol.TJSONProtocol;
-import org.apache.thrift.protocol.TProtocolFactory;
+import org.criteo.thrift.protocol.TBinaryProtocol;
+import org.criteo.thrift.protocol.TCompactProtocol;
+import org.criteo.thrift.protocol.TJSONProtocol;
+import org.criteo.thrift.protocol.TProtocolFactory;
 
 import thrift.test.Backwards;
 import thrift.test.OneOfEach;

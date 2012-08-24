@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.apache.thrift;
+package org.criteo.thrift;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;

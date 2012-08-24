@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.apache.thrift.protocol;
+package org.criteo.thrift.protocol;
 
 public class TestTBinaryProtocol extends ProtocolTestBase {
   @Override
