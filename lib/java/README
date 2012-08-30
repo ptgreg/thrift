@@ -24,14 +24,14 @@ Using Thrift with Java
 ======================
 
 The Thrift Java source is not build using the GNU tools, but rather uses
-the Apache Ant build system, which tends to be predominant amongst Java
+the Apache Maven build system, which tends to be predominant amongst Java
 developers.
 
 To compile the Java Thrift libraries, simply do the following:
 
-ant
+mvn clean package
 
-Yep, that's easy. Look for libthrift.jar in the base directory.
+Yep, that's easy. Look for libthrift.jar in the target directory.
 
 To include Thrift in your applications simply add libthrift.jar to your
 classpath, or install if in your default system classpath of choice.
@@ -39,5 +39,5 @@ classpath, or install if in your default system classpath of choice.
 Dependencies
 ============
 
-Apache Ant
-http://ant.apache.org/
+Apache Maven
+http://maven.apache.org/
